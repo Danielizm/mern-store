@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Route, Link} from 'react-router-dom';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 
 function App() {
@@ -66,10 +67,10 @@ function App() {
             <Route path="/placeorder" component={PlaceOrderScreen} />
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
-            <Route path="/cart/:id?" component={CartScreen} />
             <Route path="/category/:id" component={HomeScreen} /> */}
             <Route path="/" exact={true} component={HomeScreen} />
-            <Route path="/product/:id" component={ProductScreen} />           
+            <Route path="/product/:id" component={ProductScreen} />
+            <Route path="/cart/:id?" component={CartScreen} />           
           </div>
         </main>
         <footer className="footer">All right reserved.</footer>
