@@ -3,5 +3,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
-	MONGODB_URL: process.env.MONGODB_URL || 'mongodb://localhost/amazoon'
+	MONGODB_URL: process.env.MONGODB_URL || 'mongodb://localhost/amazoon',
+	JWT_SECRET: process.env.JWT_SECRET
 }
