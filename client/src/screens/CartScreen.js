@@ -20,7 +20,7 @@ const CartScreen = (props) => {
 		if(productId){
 			dispatch(addToCart(productId, qty));
 		}
-	},[]);
+	});
   return (
     <div className="cart">
     <div className="cart-list">

@@ -6,10 +6,10 @@ import {getToken} from '../util';
 const router = express.Router();
 
 router.post("/signin",async (req,res)=>{
-	const signinUser = await User.findOne({email:req.body.email,password:req.body.password});
+	try{ const signinUser =  await User.findOne({email:req.body.email,password:req.body.password});}catch(error){console.log(error.message)};
 	if(signinUser){
 		res.send({
-			_id:signinUser._id,
+			_id:signinUser.id,
 			name:signinUser.name,
 			email:signinUser.email,
 			isAdmin:signinUser.isAdmin,
@@ -17,6 +17,26 @@ router.post("/signin",async (req,res)=>{
 		});
 	}else {
     res.status(401).send({ message: 'Invalid Email or Password.' });
+  }
+});
+
+router.post("/register",async (req,res)=>{
+	const user = new User({
+		name:req.body.name,
+		email:req.body.email,
+		password:req.body.password
+	});
+	try{ const newUser = await user.save(); }catch(error){console.log(error.message);};
+	if(newUser){
+		res.send({
+			_id:newUser._id,
+			name:newUser.name,
+			email:newUser.email,
+			isAdmin:newUser.isAdmin,
+			token:getToken(newUser)
+		});
+	}else {
+    res.status(401).send({ message: 'Invalid User Data.' });
   }
 });
 
