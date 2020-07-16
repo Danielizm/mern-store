@@ -5,22 +5,22 @@ import { isAuth, isAdmin } from '../util';
 
 const router = express.Router();
 
-/*router.get("/",async (req,res)=>{
+router.get("/",async (req,res)=>{
 	const products = await Product.find({});
 	res.send(products);
 });
 
-router.get("/:id",(req,res)=>{
+router.get("/:id", async (req,res)=>{
 	const productId = req.params.id;
-	const product = data.products.find(item=>item._id === productId);
+	const product = await Product.findById(productId);
 	if(product){
 	   res.send(product);
     }else{
     	res.status(404).send({msg:"Product Not Found"});
     }
-});*/
+});
 
-router.post("/", async (req,res) => {
+router.post("/", isAuth, isAdmin, async (req,res) => {
 	const product = new Product({
     name: req.body.name,
     price: req.body.price,
@@ -39,23 +39,33 @@ router.post("/", async (req,res) => {
 	return res.status(500).send({msg:'Error in creating product.'});
 });
 
-router.get("/create", async (req,res) => {
-	const product = new Product({
-    name: 'Pant',
-    price: 60,
-    image: '/images/p1.jpg',
-    brand: 'Nike',
-    category: 'pants',
-    countInStock: 7,
-    description: 'pant',
-    rating: 4,
-    numReviews: 10,
-	});
-	const newProduct = await product.save();
-	if(newProduct){
-		return res.status(201).send({msg:'New Product Created',data: newProduct});
+router.put("/:id",isAuth, isAdmin, async (req,res) => {
+	const productId = req.params.id;
+	const product  = await Product.findById(productId);
+	if(product){
+    product.name = req.body.name;
+    product.price = req.body.price;
+    product.image = req.body.image;
+    product.brand = req.body.brand;
+    product.category = req.body.category;
+    product.countInStock = req.body.countInStock;
+    product.description = req.body.description;
+	const updatedProduct = await product.save();
+	if(updatedProduct){
+		return res.status(200).send({msg:'Product Updated',data: updatedProduct});
+	}}
+	return res.status(500).send({msg:'Error in updating product.'});
+});
+
+router.delete("/:id", isAuth, isAdmin, async (req,res) => {
+	const productId = req.params.id;
+	const product  = await Product.findById(productId);
+	if(product){
+    await product.remove();
+	res.send({msg:'Product Deleted'});
+	}else{
+	res.send({msg:'Error in deleting product.'});
 	}
-	return res.status(500).send({msg:'Error in creating product.'});
 });
 
 export default router;

@@ -6,7 +6,7 @@ import {getToken} from '../util';
 const router = express.Router();
 
 router.post("/signin",async (req,res)=>{
-	try{ const signinUser =  await User.findOne({email:req.body.email,password:req.body.password});}catch(error){console.log(error.message)};
+	const signinUser =  await User.findOne({email:req.body.email,password:req.body.password});
 	if(signinUser){
 		res.send({
 			_id:signinUser.id,

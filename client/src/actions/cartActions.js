@@ -1,4 +1,4 @@
-import {CART_ADD_ITEM,CART_REMOVE_ITEM} from '../constants/cartConstants';
+import {CART_ADD_ITEM,CART_REMOVE_ITEM,CART_SAVE_SHIPPING,CART_SAVE_PAYMENT} from '../constants/cartConstants';
 import axios from 'axios';
 import Cookie from 'js-cookie';
 
@@ -32,4 +32,18 @@ const removeFromCart = (productId) => async (dispatch,getState) => {
 
 }
 
-export {addToCart,removeFromCart};
+const saveShipping = (data) => (dispatch) => {
+	try{
+		dispatch({type:CART_SAVE_SHIPPING,payload:data});
+	}
+	catch(error){}
+};
+
+const savePayment = (data) => (dispatch) => {
+	try{
+		dispatch({type:CART_SAVE_PAYMENT,payload:data});
+	}
+	catch(error){}
+};
+
+export {addToCart,removeFromCart,saveShipping,savePayment};

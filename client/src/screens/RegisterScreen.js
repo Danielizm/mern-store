@@ -10,10 +10,11 @@ const RegisterScreen = (props) => {
 	const [rePassword, setRePassword] = useState('');
 	const userSigin = useSelector(state=>state.userRegister);
 	const {loading,userInfo,error} = userSigin;
+	const redirect = props.location.search?props.location.search.spit("=")[1]:"/";
 	const dispatch = useDispatch();
 	useEffect(()=>{
 		if(userInfo){
-			props.history.push("/");
+			props.history.push(redirect);
 	}},[userInfo]);
 	const submitHandler = (e) => {
 		e.preventDefault();
@@ -30,7 +31,7 @@ const RegisterScreen = (props) => {
     <li><label htmlFor="password">Password</label><input type="password" name="password" id="password" onChange={(e)=>{setPassword(e.target.value)}}/></li>
     <li><label htmlFor="rePassword">Re-enter Password</label><input type="password" name="rePassword" id="rePassword" onChange={(e)=>{setRePassword(e.target.value)}}/></li>
     <li><button type="submit" className="button primary">Register</button></li>
-    <li>Already have an account?<Link to="/signin">Sign In</Link></li>
+    <li>Already have an account?<Link to={redirect === "/" ? "/signin" : "/signin?redirect=" + redirect}>Sign In</Link></li>
     </ul>
     </form>
     </div>
