@@ -33,7 +33,7 @@ const SigninScreen = (props) => {
     <li><Link to={redirect === "/" ? "/register" : "/register?redirect=" + redirect} className="button secondary text-center">Create your account</Link></li>
     </ul>
     </form>
-    </div> 
+    </div>
   )
 }
 
