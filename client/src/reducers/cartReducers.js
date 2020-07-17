@@ -7,9 +7,8 @@ const cartReducer = (state={cartItems:[],shipping:{},payment:{}},action) => {
 		const product = state.cartItems.find(i=>i.productId === item.productId);
 		if(product){
 			return {cartItems:state.cartItems.map(i=>i.productId === item.productId?item:i)};
-		}else{
-			return {cartItems:[...state.cartItems,item]};
 		}
+		return {cartItems:[...state.cartItems,item]};
 		case CART_REMOVE_ITEM:
 		return {cartItems:state.cartItems.filter(i=>i.productId !== action.payload)}
 		case CART_SAVE_SHIPPING:

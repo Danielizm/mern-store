@@ -55,22 +55,22 @@ function App() {
           <button className="sidebar-close-button" onClick={closeMenu}>
             x
           </button>
-          {/*<ul className="categories">
+          {<ul className="categories">
             <li>
-              <Link to="/category/Pants">Pants</Link>
+              <Link to="/category/pants">Pants</Link>
             </li>
 
             <li>
-              <Link to="/category/Shirts">Shirts</Link>
+              <Link to="/category/shirts">Shirts</Link>
             </li>
-          </ul> */}
+          </ul> }
         </aside>
         <main className="main">
           <div className="content">
             {/*<Route path="/orders" component={OrdersScreen} />
             <Route path="/profile" component={ProfileScreen} />
             <Route path="/order/:id" component={OrderScreen} />
-            <Route path="/category/:id" component={HomeScreen} /> */}
+             */}
             <Route path="/signin" component={SigninScreen} />
             <Route path="/register" component={RegisterScreen} />
             <Route path="/" exact={true} component={HomeScreen} />
@@ -79,7 +79,8 @@ function App() {
             <Route path="/products" component={ProductsScreen} />   
             <Route path="/shipping" component={ShippingScreen} />
             <Route path="/payment" component={PaymentScreen} /> 
-            <Route path="/placeorder" component={PlaceOrderScreen} />       
+            <Route path="/placeorder" component={PlaceOrderScreen} />
+            <Route path="/category/:id" component={HomeScreen} />       
           </div>
         </main>
         <footer className="footer">All right reserved.</footer>

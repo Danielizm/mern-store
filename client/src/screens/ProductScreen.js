@@ -32,7 +32,7 @@ const ProductScreen = (props) => {
     <div className="details-action">
     <ul>
     	<li>Price: ${product.price}</li>
-    	<li>Status: {product.status}</li>
+    	<li>Status: {product.countInStock > 0 ? "In Stock" : "Unavailable"}</li>
     	<li>Qty: <select value={qty} onChange={(e)=>setQty(e.target.value)}>
         {[...Array(product.countInStock).keys()].map(item=>{
             return <option key={item+1} value={item+1}>{item+1}</option>

@@ -9,7 +9,7 @@ const PlaceOrderScreen = (props) => {
 	const { cartItems, shipping, payment } = cart;
     if(!shipping.address){props.history.push("/shipping");}
     else if(!payment.paymentMethod){props.history.push("/payment");}
-    const itemPrice = cartItems.reduce((a,c)=>a+c.price*c.qty,0);
+    const itemPrice = cartItems.reduce((a,c)=>{const b =c.price*10*c.qty; return (a+b)/10;},0);
     const shippingPrice = itemPrice > 100 ? 0 : 10;
     const taxPrice = 0.1 * itemPrice;
     const totalPrice = itemPrice + shippingPrice + taxPrice;
@@ -38,7 +38,7 @@ const PlaceOrderScreen = (props) => {
     <li><h3>Shopping Cart</h3><div>Price</div></li>
     { cartItems.length === 0 ? <div>Cart is empty</div> :
     	cartItems.map(item =>
-    		<li>
+    		<li key={item.productId}>
     		<div className="cart-image"><img src={item.image} alt="product"/></div>
     		<div className="cart-name">
     		<div><Link to={"/product/"+item.productId}>{item.name}</Link></div>

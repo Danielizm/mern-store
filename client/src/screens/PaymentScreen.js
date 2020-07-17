@@ -20,7 +20,7 @@ const PaymentScreen = (props) => {
     <form action="" onSubmit={submitHandler}>
     <ul className="form-container">
     <li><h2>Payment</h2></li>
-    <li><div><input type="radio" name="paymentMethod" id="paymentMethod" value="paypal" onChange={(e)=>{setPaymentMethod(e.target.value)}}/><label htmlFor="paymentMethod">Paypal</label></div></li>
+    <li><div><input type="radio" name="paymentMethod" id="paymentMethod" value="Paypal" onChange={(e)=>{setPaymentMethod(e.target.value)}}/><label htmlFor="paymentMethod">Paypal</label></div></li>
     <li><button type="submit" className="button primary">Continue</button></li>
     </ul>
     </form>
