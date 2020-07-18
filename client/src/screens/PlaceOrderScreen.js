@@ -9,10 +9,10 @@ const PlaceOrderScreen = (props) => {
 	const { cartItems, shipping, payment } = cart;
     if(!shipping.address){props.history.push("/shipping");}
     else if(!payment.paymentMethod){props.history.push("/payment");}
-    const itemPrice = cartItems.reduce((a,c)=>{const b =c.price*10*c.qty; return (a+b)/10;},0);
+    const itemPrice = cartItems.reduce((a,c)=>{const b =c.price*10*c.qty; return a+b;},0);
     const shippingPrice = itemPrice > 100 ? 0 : 10;
-    const taxPrice = 0.1 * itemPrice;
-    const totalPrice = itemPrice + shippingPrice + taxPrice;
+    const taxPrice = itemPrice/10;
+    const totalPrice = (itemPrice*10  + taxPrice*10)/100 + shippingPrice;
 	const dispatch = useDispatch();
 	const placeOrderHandler = () => {
 
@@ -57,9 +57,9 @@ const PlaceOrderScreen = (props) => {
     <ul>
         <li><button className="button primary full-width">Place Order</button></li>
         <li><h3>Order Summary</h3></li>
-        <li><div>Items</div><div>${itemPrice}</div></li>
+        <li><div>Items</div><div>${itemPrice/10}</div></li>
         <li><div>Shipping</div><div>${shippingPrice}</div></li>
-        <li><div>Tax</div><div>${taxPrice}</div></li>
+        <li><div>Tax</div><div>${taxPrice/10}</div></li>
         <li><div>Order Total</div><div>${totalPrice}</div></li>
     </ul>
     </div>
