@@ -3,6 +3,7 @@ import {productListReducer, productDetailsReducer, productSaveReducer,
 productDeleteReducer} from './reducers/productReducers';
 import {cartReducer} from './reducers/cartReducers';
 import {userSigninReducer,userRegisterReducer} from './reducers/userReducers';
+import {orderCreateReducer} from './reducers/orderReducers';
 import thunk from 'redux-thunk';
 import Cookie from 'js-cookie';
 
@@ -17,7 +18,8 @@ const reducer =combineReducers({
 	userSignin:userSigninReducer,
 	userRegister:userRegisterReducer,
 	productSave:productSaveReducer,
-	productDelete:productDeleteReducer
+	productDelete:productDeleteReducer,
+	orderCreate:orderCreateReducer
 });
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer,initialState,composeEnhancer(applyMiddleware(thunk)));

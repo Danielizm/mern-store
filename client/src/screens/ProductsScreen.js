@@ -17,7 +17,7 @@ const ProductsScreen = (props) => {
 	const productSave = useSelector(state=>state.productSave);
 	const {loading:loadingSave,success:successSave,error:errorSave} = productSave;
     const productDelete = useSelector(state=>state.productDelete);
-    const {loading:loadingDelete,success:successDelete,error:errorDelete} = productDelete;
+    const {success:successDelete} = productDelete;
 	const dispatch = useDispatch();
 	useEffect(()=>{
         if(successSave){

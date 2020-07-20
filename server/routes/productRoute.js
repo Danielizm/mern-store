@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import Product from '../models/productModel';
 import express from 'express';
 import { isAuth, isAdmin } from '../util';

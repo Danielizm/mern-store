@@ -2,7 +2,7 @@ import React,{useState,useEffect}from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector,useDispatch} from 'react-redux';
 import {signin} from '../actions/userActions';
-import CheckoutSteps from '../components/CheckoutSteps';
+//import CheckoutSteps from '../components/CheckoutSteps';
 
 const SigninScreen = (props) => {
 	const [email, setEmail] = useState('');
@@ -21,6 +21,7 @@ const SigninScreen = (props) => {
 		dispatch(signin(email,password));
 	};
   return (
+  	<div>
     <div className="form">
     <form action="" onSubmit={submitHandler}>
     <ul className="form-container">
@@ -33,6 +34,7 @@ const SigninScreen = (props) => {
     <li><Link to={redirect === "/" ? "/register" : "/register?redirect=" + redirect} className="button secondary text-center">Create your account</Link></li>
     </ul>
     </form>
+    </div>
     </div>
   )
 }
