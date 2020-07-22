@@ -7,8 +7,7 @@ import { createOrder } from '../actions/orderActions';
 const PlaceOrderScreen = (props) => {
 	const cart = useSelector(state=>state.cart);
 	const { cartItems, shipping, payment } = cart;
-    const orderCreate = useSelector(state=>state.orderCreate);
-    const { loading, success, error, order } = orderCreate;
+    
     if(!shipping.address){props.history.push("/shipping");}
     else if(!payment.paymentMethod){props.history.push("/payment");}
     const tranPrice = cartItems.reduce((a,c)=>{const b =c.price*10*c.qty; return a+b;},0);
@@ -20,8 +19,12 @@ const PlaceOrderScreen = (props) => {
 	const placeOrderHandler = () => {
         dispatch(createOrder({orderItems: cartItems, shipping,payment,itemsPrice,shippingPrice,taxPrice,totalPrice}));
 	};
+
+    const orderCreate = useSelector(state=>state.orderCreate);
+    const { order, success} = orderCreate;
+
 	useEffect(()=>{
-        if(success){props.history.push("/order/" + order.id);}
+        if(success){console.log(order._id);props.history.push("/order/" + order._id);}
 	},[success]);
   return (
     <div>

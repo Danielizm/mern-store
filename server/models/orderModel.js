@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema({
 	orderItems : [orderItemSchema],
 	shipping: shippingSchema,
 	payment: paymentSchema,
-	ItemsPrice:{type:Number},
+	itemsPrice:{type:Number},
 	taxPrice: {type:Number},
 	shippingPrice: {type:Number},
 	totalPrice: {type:Number},

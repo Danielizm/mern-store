@@ -13,6 +13,15 @@ router.get("/",isAuth,isAdmin,async (req,res) => {
     }
 });
 
+router.get("/:id", isAuth,async (req,res) => {
+	const order = await Order.findById(req.params.id).populate('user');
+	if(order){
+		res.send(order);
+	}else{
+		res.status(404).send({msg:'Order Not Found!'});
+	}
+});
+
 router.post("/", isAuth, async (req,res) => {
 	const newOrder = new Order({
 		orderItems: req.body.orderItems,
@@ -40,5 +49,26 @@ router.delete("/:id", isAuth,isAdmin,async (req,res) => {
 		res.send({msg:'Error in deleting order!'});
 	}
 });
+
+router.put("/:id/pay",isAuth,async (req,res)=>{
+	const order = await Order.findById(req.params.id);
+	if(order){
+		order.isPaid = true;
+		order.paidAt = Date.now();
+		order.payment = {
+			paymentMethod: 'paypal',
+			paymentResult: {
+              payerID: req.body.payerID,
+              orderID: req.body.orderID,
+              paymentID: req.body.paymentID
+            }
+		}
+		const updatedOrder = await order.save();
+		res.send({msg:"Order Paid",order:updatedOrder});
+	}else{
+		res.status(404).send({msg:"Order Not Found"});
+	}
+});
+
 
 export default router;
