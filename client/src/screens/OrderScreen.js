@@ -8,8 +8,6 @@ const OrderScreen = (props) => {
 	const orderPay = useSelector(state=>state.orderPay);
 	const {loading:loadingPay,success:successPay,error:errorPay} = orderPay;
 	const dispatch = useDispatch();
-	const orderDetails = useSelector(state=>state.orderDetails);
-	const {loading, order, error} = orderDetails;
 
 	useEffect(()=>{
 		if(successPay){props.history.push("/profile")}else{
@@ -17,8 +15,11 @@ const OrderScreen = (props) => {
 	},[successPay]);
 
 	const handleSuccessPayment = (paymentResult) => {
-		dispatch(payOrder({order,paymentResult}));
+		dispatch(payOrder(order,paymentResult));
 	};
+
+	const orderDetails = useSelector(state=>state.orderDetails);
+	const {loading, order, error} = orderDetails;
     
 
   return ( loading ? <div>Loading...</div> : error ? <div>{error}</div> :

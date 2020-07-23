@@ -4,10 +4,12 @@ import axios from 'axios';
 
 const PaypalButton = (props) => {
 	const [sdkReady,setSdkReady] = useState(false);
+	const [paypalLoaded, setPaypalLoaded] = useState(false);
 	const addPaypalSdk = async () => {
 		const result = await axios.get("/api/config/paypal");
 		const clientId = result.data;
 		const script = document.createElement('script');
+		script.id = 'paypal-sdk';
 		script.type = 'text/javascript';
 		script.src='https://www.paypal.com/sdk/js?currency=AUD&client-id=' + clientId;
 		script.async = true;
@@ -37,7 +39,10 @@ const PaypalButton = (props) => {
 
     useEffect(()=>{
     	if(!window.paypal){addPaypalSdk();}
-    	return () => {};
+    	return () => {
+    		/*const removedScript = document.getElementById('paypal-sdk');
+    		document.body.removeChild(removedScript);*/
+        };
     },[]);
 
     
@@ -45,7 +50,9 @@ const PaypalButton = (props) => {
   return <div>Loading...</div>
   }
   const Button = window.paypal.Buttons.driver('react', { React, ReactDOM });
-  return <Button {...props} createOrder={(data, actions)=>createOrder(data, actions)} onApprove={(data, actions)=>onApprove(data, actions)}/>
+  return <Button {...props} createOrder={(data, actions)=>createOrder(data, actions)} onApprove={(data, actions)=>onApprove(data, actions)} onButtonReady={() => {
+                    setPaypalLoaded(true);
+                  }}/>
 
 }
 

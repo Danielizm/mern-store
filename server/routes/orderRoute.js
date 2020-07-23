@@ -13,14 +13,24 @@ router.get("/",isAuth,isAdmin,async (req,res) => {
     }
 });
 
+router.get("/mine", isAuth, async (req,res) => {
+	try{
+	const orders = await Order.find({user:req.user_id});
+	res.send(orders);
+    }catch(error){
+    	res.send({msg:error.message});
+    }
+});
+
 router.get("/:id", isAuth,async (req,res) => {
-	const order = await Order.findById(req.params.id).populate('user');
+	const order = await Order.findById(req.params.id);
 	if(order){
 		res.send(order);
 	}else{
 		res.status(404).send({msg:'Order Not Found!'});
 	}
 });
+
 
 router.post("/", isAuth, async (req,res) => {
 	const newOrder = new Order({
@@ -37,7 +47,6 @@ router.post("/", isAuth, async (req,res) => {
 	if(newOrderCreated){
 		res.status(201).send({msg:'New order created.',data:newOrderCreated});
 	}
-	res.status(500).send({msg:'Error in creating order'});
 });
 
 router.delete("/:id", isAuth,isAdmin,async (req,res) => {

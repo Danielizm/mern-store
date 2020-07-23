@@ -34,6 +34,6 @@ const orderSchema = new mongoose.Schema({
 	deliveredAt: {type:Date}
 },{timestamps:true});
 
-const Odrder = mongoose.model('Cs-order',orderSchema);
+const Order = mongoose.model('Cs-order',orderSchema);
 
-export default Odrder;
+export default Order;
