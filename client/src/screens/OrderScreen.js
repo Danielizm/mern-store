@@ -2,7 +2,7 @@ import React,{useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector,useDispatch} from 'react-redux';
 import {detailsOrder,payOrder} from '../actions/orderActions';
-import PaypalButton from '../components/PaypalButton';
+import PaypalButton from '../components/PaypalBtn';
 
 const OrderScreen = (props) => {
 	const orderPay = useSelector(state=>state.orderPay);

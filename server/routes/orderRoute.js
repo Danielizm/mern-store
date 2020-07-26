@@ -13,9 +13,9 @@ router.get("/",isAuth,isAdmin,async (req,res) => {
     }
 });
 
-router.get("/mine", isAuth, async (req,res) => {
+router.get("/mine",isAuth, async (req,res) => {
 	try{
-	const orders = await Order.find({user:req.user_id});
+	const orders = await Order.find({user:req.user._id});
 	res.send(orders);
     }catch(error){
     	res.send({msg:error.message});
