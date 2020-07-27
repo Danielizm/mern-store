@@ -10,7 +10,11 @@ import {
 	PRODUCT_SAVE_FAIL,
 	PRODUCT_DELETE_REQUEST, 
 	PRODUCT_DELETE_SUCCESS, 
-	PRODUCT_DELETE_FAIL } from '../constants/productConstants';
+	PRODUCT_DELETE_FAIL,
+	PRODUCT_REVIEW_SAVE_REQUEST, 
+	PRODUCT_REVIEW_SAVE_SUCCESS, 
+	PRODUCT_REVIEW_SAVE_FAIL,
+	PRODUCT_REVIEW_SAVE_RESET, } from '../constants/productConstants';
 
 const productListReducer = (state = {products: []}, action ) => {
 	switch (action.type){
@@ -64,4 +68,19 @@ const productDeleteReducer = (state = {product: {}}, action ) => {
 	}
 }
 
-export { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer };
+const productReviewSaveReducer = (state={review:{}},action) => {
+	switch (action.type){
+		case PRODUCT_REVIEW_SAVE_REQUEST:
+		return {loading:true};
+		case PRODUCT_REVIEW_SAVE_SUCCESS:
+		return {loading:false, success:true, review:action.payload};
+		case PRODUCT_REVIEW_SAVE_RESET:
+		return {loading:false, error: action.payload}
+		case PRODUCT_REVIEW_SAVE_RESET:
+		return {};
+		default:
+		return state;
+	}
+};
+
+export { productListReducer, productDetailsReducer, productSaveReducer, productDeleteReducer,productReviewSaveReducer };

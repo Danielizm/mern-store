@@ -37,8 +37,14 @@ function PaypalButton(props) {
     .catch(err => console.log(err));
 
   useEffect(() => {
-    if (!window.paypal) {
+    if (window !== undefined && window.paypal === undefined) {
       addPaypalSdk();
+    } else if (
+      window !== undefined &&
+      window.paypal !== undefined &&
+      props.onButtonReady
+    ) {
+      props.onButtonReady();
     }
     
     return () => {

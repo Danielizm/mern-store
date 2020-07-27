@@ -11,12 +11,12 @@ import axios from 'axios';
  };*/
  
  let CLIENT_ID;//"AVlVzxi4EDquuVx3k-tsXHFGEEIKySN6xINhGjEP4PgwxYYGAyFtSiGIG0jrCB3g0-87724zrkViiUQU";
- const getId = () => {
-  return axios.get("/api/config/paypal").then((res)=>{CLIENT_ID = res.data;console.log(CLIENT_ID);});
+ const getId = async () => {
+  const result = await axios.get("/api/config/paypal");
+  return result.data;
  };
- fetch("/api/config/paypal")
-      .then(res => CLIENT_ID = res.data);
-   //process.env.PAYPAL_CLIENT_ID;
+
+ console.log(process.env.PAYPAL_CLIENT_ID);
 
 let PayPalButton = null;
 class PaypalButton extends React.Component {
@@ -66,7 +66,6 @@ class PaypalButton extends React.Component {
     return actions.order.create({
       purchase_units: [
         {
-          description: +"Mercedes G-Wagon",
           amount: {
             currency_code: "AUD",
             value: this.props.amount
@@ -106,4 +105,4 @@ class PaypalButton extends React.Component {
 }
 
 
- export default scriptLoader(`https://www.paypal.com/sdk/js?currency=AUD&client-id=${CLIENT_ID}`)(PaypalButton);
+ export default scriptLoader('https://www.paypal.com/sdk/js?currency=AUD&client-id=' + getId())(PaypalButton);

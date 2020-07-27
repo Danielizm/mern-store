@@ -2,6 +2,7 @@ import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector,useDispatch} from 'react-redux';
 import {listProducts} from '../actions/productActions';
+import Rating from '../components/Rating';
 
 const HomeScreen = (props) => {
 	const [searchKeyword,setSearchKeyword] = useState('');
@@ -54,11 +55,10 @@ const HomeScreen = (props) => {
                 <div className="product-brand">{product.brand}</div>
                 <div className="product-price">${product.price}</div>
                 <div className="product-rating">
-                  {/*<Rating
+                  <Rating
                     value={product.rating}
                     text={product.numReviews + ' reviews'}
-                  />*/}
-                <div className="product-rating">4.5 Stars (10 views)</div>
+                  />
                 </div>
               </div>
               

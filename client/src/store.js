@@ -1,6 +1,6 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import {productListReducer, productDetailsReducer, productSaveReducer,
-productDeleteReducer} from './reducers/productReducers';
+productDeleteReducer,productReviewSaveReducer} from './reducers/productReducers';
 import {cartReducer} from './reducers/cartReducers';
 import {userSigninReducer,userRegisterReducer,userUpdateReducer} from './reducers/userReducers';
 import {orderCreateReducer,orderListReducer,orderDeleteReducer,orderDetailsReducer,orderPayReducer,myOrderListReducer} from './reducers/orderReducers';
@@ -20,6 +20,7 @@ const reducer =combineReducers({
 	userUpdate:userUpdateReducer,
 	productSave:productSaveReducer,
 	productDelete:productDeleteReducer,
+	productReviewSave:productReviewSaveReducer,
 	orderCreate:orderCreateReducer,
 	orderList:orderListReducer,
 	orderDelete:orderDeleteReducer,
