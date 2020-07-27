@@ -1,6 +1,7 @@
 import React,{useState,useEffect}from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {saveProduct,listProducts,deleteProduct} from '../actions/productActions';
+import axios from 'axios';
 
 const ProductsScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
@@ -12,6 +13,7 @@ const ProductsScreen = (props) => {
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState('');
     const [description, setDescription] = useState('');
+    const [uploading, setUploading] = useState(false);
     const productList = useSelector(state=>state.productList);
     const { loading, products, error} = productList;
 	const productSave = useSelector(state=>state.productSave);
@@ -44,6 +46,21 @@ const ProductsScreen = (props) => {
     const deleteHandler = (product) => {
         dispatch(deleteProduct(product._id));
     };
+    const uploadFileHandler = (e) => {
+        const file = e.target.files[0];
+        const bodyFormData = new FormData();
+        bodyFormData.append('image',file);
+        setUploading(true);
+        axios.post('/api/uploads/s3',bodyFormData,{
+            headers:{'content-type':'multipart/form-data'}
+        }).then((res)=>{
+            setImage(res.data);
+            setUploading(false);
+        }).catch((error)=>{
+            console.log(error.message);
+            setUploading(false);
+        });
+    };
   return (
     <div className="content content-margined">
     <div className="product-header"><h3>Products</h3><button className="button primary" onClick={()=>openModal({})}>Create Product</button></div>
@@ -55,7 +72,10 @@ const ProductsScreen = (props) => {
     <li>{loadingSave && <div>Loading...</div>}{errorSave && <div>{errorSave}</div>}</li>
     <li><label htmlFor="name">Name</label><input type="text" name="name" id="name" value={name} onChange={(e)=>{setName(e.target.value)}}/></li>
     <li><label htmlFor="price">Price</label><input type="text" name="price" id="price" value={price} onChange={(e)=>{setPrice(e.target.value)}}/></li>
-    <li><label htmlFor="image">Image</label><input type="text" name="image" id="image" value={image} onChange={(e)=>{setImage(e.target.value)}}/></li>
+    <li><label htmlFor="image">Image</label>
+    <input type="text" name="image" id="image" value={image} onChange={(e)=>{setImage(e.target.value)}}/>
+    <input type="file" onChange={uploadFileHandler}/>{uploading && <div>Uploading...</div>}
+    </li>
     <li><label htmlFor="brand">Brand</label><input type="text" name="brand" id="brand" value={brand} onChange={(e)=>{setBrand(e.target.value)}}/></li>
     <li><label htmlFor="category">Category</label><input type="text" name="category" id="category" value={category} onChange={(e)=>{setCategory(e.target.value)}}/></li>
     <li><label htmlFor="countInStock">CountInStock</label><input type="text" name="countInStock" id="countInStock" value={countInStock} onChange={(e)=>{setCountInStock(e.target.value)}}/></li>

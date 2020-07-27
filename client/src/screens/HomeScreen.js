@@ -57,7 +57,7 @@ const HomeScreen = (props) => {
                 <div className="product-rating">
                   <Rating
                     value={product.rating}
-                    text={product.numReviews + ' reviews'}
+                    text={product.numReviews + (product.numReviews > 1 ? ' reviews' : ' review')}
                   />
                 </div>
               </div>

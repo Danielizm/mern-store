@@ -12,12 +12,15 @@
   "author": "Daniel",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.720.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "eslint-plugin-react": "^7.20.3",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.22"
+    "mongoose": "^5.9.22",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.3",
