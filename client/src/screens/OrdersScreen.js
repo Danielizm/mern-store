@@ -15,7 +15,7 @@ const OrdersScreen = (props) => {
 	useEffect(()=>{
 		dispatch(listOrder());
 	},[successDelete]);
-  return  (loading?<div>Loading</div>:
+  return  (loading?<div>Loading</div>: error ? <div>{error}</div> :
     <div className="content content-margined">
     <div className="order-header"><h3>Orders</h3></div>
     <div className="order-list">

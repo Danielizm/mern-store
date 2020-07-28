@@ -74,7 +74,7 @@ const productReviewSaveReducer = (state={review:{}},action) => {
 		return {loading:true};
 		case PRODUCT_REVIEW_SAVE_SUCCESS:
 		return {loading:false, success:true, review:action.payload};
-		case PRODUCT_REVIEW_SAVE_RESET:
+		case PRODUCT_REVIEW_SAVE_FAIL:
 		return {loading:false, error: action.payload}
 		case PRODUCT_REVIEW_SAVE_RESET:
 		return {};
