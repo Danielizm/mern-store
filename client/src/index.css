@@ -41,14 +41,15 @@ button {
   font-weight: bold;
   text-decoration: none;
 }
-.header-links a {
+.header-links a,.header-links span {
   color: #ffffff;
   text-decoration: none;
   padding: 1rem;
 }
-.header-links a:hover {
+.header-links a:hover,.header-links span:hover {
   color: #ff8000;
 }
+.header-links span{cursor:pointer;}
 .main {
   grid-area: main;
 }
