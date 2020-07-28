@@ -34,9 +34,6 @@
     "eslint-plugin-react-hooks": "^4.0.8",
     "nodemon": "^2.0.4"
   },
-  "babel": {
-    "presets": ["@babel/preset-env"]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Danielizm/mern-store.git"
