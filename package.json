@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --watch server --exec babel-node server/server.js",
     "server": "nodemon --watch server --exec babel-node server/server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently -n 'server,client' -c 'red,green'  \"npm run server\" \"npm run client\"",
