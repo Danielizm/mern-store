@@ -15,7 +15,7 @@
   "author": "Daniel",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.720.0",
+    "aws-sdk": "^2.814.0",
     "@babel/cli": "^7.10.3",
     "@babel/core": "^7.10.3",
     "@babel/node": "^7.10.3",
